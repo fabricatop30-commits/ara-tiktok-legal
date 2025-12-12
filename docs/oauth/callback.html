@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OAuth Callback – ARA</title>
+</head>
+<body style="font-family:system-ui;max-width:900px;margin:40px auto;line-height:1.5">
+<h1>OAuth Callback – ARA</h1>
+<p>If you see a <code>code</code> below, copy it and paste it into the PowerShell prompt.</p>
+
+<pre id="out" style="background:#111;color:#0f0;padding:16px;border-radius:12px;overflow:auto"></pre>
+
+<script>
+  const p = new URLSearchParams(window.location.search);
+  const code = p.get("code");
+  const state = p.get("state");
+  const err = p.get("error");
+  const desc = p.get("error_description");
+
+  let text = "";
+  if (err) {
+    text += "ERROR: " + err + "\\n";
+    if (desc) text += "DESC: " + desc + "\\n";
+  }
+  text += "code=" + (code || "") + "\\n";
+  text += "state=" + (state || "") + "\\n";
+  document.getElementById("out").textContent = text;
+</script>
+
+</body>
+</html>
